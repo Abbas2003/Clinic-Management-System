@@ -1,12 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        remotePatterns: [
-            {
-                hostname: "familydoctor.org",
-            }
-        ]
-    }
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'static.vecteezy.com',
+        pathname: '/system/resources/**',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
