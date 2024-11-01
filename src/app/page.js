@@ -1,14 +1,11 @@
-import Image from "next/image";
 import Hero from "./components/Hero";
-import Header from "./components/Header";
-import Doctors from "./components/Doctors";
+import DoctorsSection from "./components/DoctorsSection";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Header />
       <Hero />
-      <Doctors />
+      <DoctorsSection isHome={true} />
     </main>
   );
 }
