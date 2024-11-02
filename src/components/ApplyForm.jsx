@@ -42,7 +42,7 @@ const formSchema = z.object({
   address: z.string().min(5),
 });
 
-export default function () {
+export default function DoctorApplyForm() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
