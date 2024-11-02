@@ -1,18 +1,10 @@
-import React from 'react'
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select"
-import { doctors, specializations } from '@/lib/data'
-import DoctorCard from '@/app/components/doctorCard'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { ClockIcon, HomeIcon, PlusIcon } from '@radix-ui/react-icons'
+import Link from "next/link"
+import { Button } from "./ui/button"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
+import { doctors, specializations } from "@/lib/data"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import { ClockIcon, HomeIcon, PlusIcon } from "@radix-ui/react-icons"
 
 
 

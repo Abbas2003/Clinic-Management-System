@@ -1,7 +1,7 @@
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import Link from "next/link"
+import { Button } from "./ui/button"
+import Image from "next/image"
+
 
 const Hero = () => {
     return (
