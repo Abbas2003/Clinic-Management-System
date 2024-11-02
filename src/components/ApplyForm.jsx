@@ -17,8 +17,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import Dropzone from "react-dropzone";
-import UploadImg from "./UploadImage";
 import {
   Select,
   SelectContent,
@@ -279,7 +277,6 @@ export default function () {
           )}
         />
 
-        <UploadImg />
 
         <Button type="submit">Submit</Button>
       </form>

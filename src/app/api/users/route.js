@@ -2,7 +2,7 @@ import connectDB from "@/lib/connectDB";
 import { UserModel } from "@/lib/Models/UserModel";
 
 
-export async function GET(req){
+export async function POST(req){
     await connectDB();
     try{
         const obj = await req.json();
@@ -26,7 +26,7 @@ export async function GET(req){
     }
 }
 
-export async function POST(req){
+export async function GET(req){
     await connectDB();
 
     const users = await UserModel.find();
