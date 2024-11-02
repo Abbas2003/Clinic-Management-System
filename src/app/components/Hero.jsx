@@ -16,10 +16,10 @@ const Hero = () => {
                     </p>
                     <div className="flex w-full md:justify-start justify-center items-end gap-4">
                         <Link href={"/doctors"}>
-                            <Button className="text-md">View All Doctors</Button>
+                            <Button className="text-md">Find Doctor You Need</Button>
                         </Link>
-                        <Link href={"/doctors"}>
-                            <Button variant="outline" className="text-md">Book Now</Button>
+                        <Link href={"/doctors/apply"}>
+                            <Button variant="outline" className="text-md">Apply as a Doctor</Button>
                         </Link>
                     </div>
 

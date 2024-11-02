@@ -83,7 +83,7 @@ const DoctorsSection = ({ isHome }) => {
                                         <ClockIcon />
                                         <h1 className="font-semibold">Appointment Time</h1>
                                     </div>
-                                    <h1>{doctor.appointmentTime}</h1>
+                                    <h1>{doctor.timing}</h1>
                                 </div>
                             </CardContent>
                         )}
