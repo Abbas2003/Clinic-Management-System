@@ -13,7 +13,7 @@ const UserSchema = new Schema({
         enum: ['user', 'doctor', 'admin']
     },
     doctorInfo: {
-        fees: String,
+        fees: Number,
         specialization: String,
         bio: String,
         hospital: String,

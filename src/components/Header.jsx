@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/menubar"
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { ModeToggle } from '@/components/dark-theme-toggler'
-import { auth } from '../../auth'
+import { auth, signOut } from '../../auth'
 import Link from 'next/link'
 import { Button } from './ui/button'
 import Image from 'next/image'
@@ -20,8 +20,7 @@ import Image from 'next/image'
 const Header = async () => {
 
     const session = await auth()
-    console.log(session);
-
+    // console.log(session);
 
     return (
         <section className='container mx-auto flex items-center justify-between p-4 border-b'>
@@ -42,20 +41,24 @@ const Header = async () => {
                                 <MenubarContent>
                                     <Link href={'/profile'}>
                                         <MenubarItem>
-                                            Profile <MenubarShortcut>⌘P</MenubarShortcut> 
+                                            Profile <MenubarShortcut>⌘P</MenubarShortcut>
                                         </MenubarItem>
                                     </Link>
 
                                     <Link href={'/appointments'}>
                                         <MenubarItem>
-                                            My Appointments <MenubarShortcut>⌘A</MenubarShortcut> 
+                                            My Appointments <MenubarShortcut>⌘A</MenubarShortcut>
                                         </MenubarItem>
                                     </Link>
                                     <MenubarSeparator />
-
-                                    <MenubarItem>
-                                        Logout <MenubarShortcut>⌘L</MenubarShortcut> 
-                                    </MenubarItem>
+                                    <form
+                                        action={async () => {
+                                            "use server";
+                                            await signOut("google");
+                                        }}
+                                    >
+                                        <Button variant={"outline"}>Logout</Button>
+                                    </form>
                                 </MenubarContent>
 
                             </MenubarMenu>

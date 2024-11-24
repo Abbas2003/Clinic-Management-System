@@ -15,30 +15,18 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import React, { useCallback } from "react";
-import { useDropzone } from "react-dropzone";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
+import React from "react";
+
 
 const formSchema = z.object({
-  name: z.string().min(2).max(50),
   bio: z.string().min(2).max(120),
   hospital: z.string().min(2).max(50),
-  days: z.array(z.string()).min(1, "Select at least one day"),
   fees: z.string(),
   gender: z.string(),
   appointmentTime: z.string(),
-  degree: z.string(),
   specialization: z.string(),
   experience: z.string(),
-  profileImg: z.string().url("Enter a valid image URL"),
   number: z.string().regex(/^\d+$/, "Enter a valid phone number"),
-  email: z.string().email("Enter a valid email address"),
   address: z.string().min(5),
 });
 
@@ -46,26 +34,18 @@ export default function DoctorApplyForm() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
       bio: "",
       hospital: "",
-      days: [],
       fees: "",
       gender: "",
       appointmentTime: "",
-      degree: "",
       specialization: "",
       experience: "",
-      profileImg: "",
       number: "",
-      email: "",
       address: "",
     },
   });
-  const onDrop = useCallback((acceptedFiles) => {
-    // Do something with the files
-  }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+ 
 
   function onSubmit(values) {
     console.log(values);
@@ -75,19 +55,7 @@ export default function DoctorApplyForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-2 gap-5">
-          <FormField
-            name="name"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          
 
           <FormField
             name="hospital"
@@ -102,7 +70,7 @@ export default function DoctorApplyForm() {
               </FormItem>
             )}
           />
-          <FormField
+          {/* <FormField
             name="days"
             control={form.control}
             render={({ field }) => (
@@ -136,7 +104,7 @@ export default function DoctorApplyForm() {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
           <FormField
             name="fees"
             control={form.control}
@@ -179,19 +147,6 @@ export default function DoctorApplyForm() {
             )}
           />
 
-          <FormField
-            name="degree"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Degree</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter degree" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
           <FormField
             name="specialization"
@@ -234,20 +189,7 @@ export default function DoctorApplyForm() {
             )}
           />
 
-          <FormField
-            name="email"
-            control={form.control}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter email address" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
+         
           <FormField
             name="address"
             control={form.control}

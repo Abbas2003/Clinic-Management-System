@@ -1,9 +1,11 @@
 import Link from "next/link"
 import { Button } from "./ui/button"
 import Image from "next/image"
+import { auth } from "../../auth"
 
 
-const Hero = () => {
+const Hero = async () => {
+    const session = await auth();
     return (
         <section className="body-font">
             <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
@@ -18,7 +20,7 @@ const Hero = () => {
                         <Link href={"/doctors"}>
                             <Button className="text-md">Find Doctor You Need</Button>
                         </Link>
-                        <Link href={"/doctors/apply"}>
+                        <Link href={session ? "/doctors/apply" : "/signin"}>
                             <Button variant="outline" className="text-md">Apply as a Doctor</Button>
                         </Link>
                     </div>
