@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import React from "react";
+import { addRequest } from "@/actions/requests/requests";
 
 
 const formSchema = z.object({
@@ -27,11 +28,13 @@ const formSchema = z.object({
   specialization: z.string(),
   experience: z.string(),
   number: z.string().regex(/^\d+$/, "Enter a valid phone number"),
-  address: z.string().min(5),
+  address: z.string().min(5)
 });
 
-export default function DoctorApplyForm() {
+export default function DoctorApplyForm({ session }) {
+
   const form = useForm({
+    reset,
     resolver: zodResolver(formSchema),
     defaultValues: {
       bio: "",
@@ -47,8 +50,10 @@ export default function DoctorApplyForm() {
   });
  
 
-  function onSubmit(values) {
+  async function onSubmit(values) {
     console.log(values);
+    values.user = session.user._id;
+    await addRequest(values)
   }
 
   return (
