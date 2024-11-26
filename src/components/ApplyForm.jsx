@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import React from "react";
 import { addRequest } from "@/actions/requests/requests";
+import { useToast } from "@/hooks/use-toast";
 
 
 const formSchema = z.object({
@@ -33,8 +34,9 @@ const formSchema = z.object({
 
 export default function DoctorApplyForm({ session }) {
 
-  const form = useForm({
-    reset,
+  const { toast } = useToast()
+
+  const form = useForm({	
     resolver: zodResolver(formSchema),
     defaultValues: {
       bio: "",
@@ -54,6 +56,11 @@ export default function DoctorApplyForm({ session }) {
     console.log(values);
     values.user = session.user._id;
     await addRequest(values)
+    form.reset();
+    toast({
+      title: "Your application is submitted.",
+      description: "You will be informed by email in 3 business days.",
+    })
   }
 
   return (
@@ -225,7 +232,7 @@ export default function DoctorApplyForm({ session }) {
         />
 
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit">{form.formState.isSubmitting ? "Loading..." : "Submit"}</Button>
       </form>
     </Form>
   );
