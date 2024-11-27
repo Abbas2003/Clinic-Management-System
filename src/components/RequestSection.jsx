@@ -68,7 +68,7 @@ export default function DoctorRequests({ requests, status }) {
     }
     replace(`${pathname}?${params.toString()}`);
 
-    console.log("params=>", params);
+    // console.log("params=>", params);
   }, [activeFilter]);
 
   // const filteredRequests = requests.filter(

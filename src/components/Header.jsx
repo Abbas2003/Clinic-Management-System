@@ -20,7 +20,7 @@ import Image from 'next/image'
 const Header = async () => {
 
     const session = await auth()
-    console.log(session);
+    // console.log(session);
 
     return (
         <section className='container mx-auto flex items-center justify-between p-4 border-b'>

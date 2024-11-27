@@ -18,7 +18,7 @@ const Requests = async () => {
   if (!session && !session?.user?.role != 'admin') redirect('/')
   const { requests } = await getRequest();
 
-  console.log("Requests ->", requests);
+  // console.log("Requests ->", requests);
 
   return (
     <div className='container mx-auto'>
