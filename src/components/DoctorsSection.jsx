@@ -5,12 +5,14 @@ import { doctors, specializations } from "@/lib/data"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { ClockIcon, HomeIcon, PlusIcon } from "@radix-ui/react-icons"
+import { getRequest } from "@/actions/requests/requests"
 
 
 
-const DoctorsSection = ({ isHome }) => {
+const DoctorsSection = async ({ isHome }) => {
 
     const fewDoctors = isHome ? doctors.slice(0, 6) : doctors
+    const {} = await getRequest();
 
     return (
         <div className='container mx-auto mt-5'>

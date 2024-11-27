@@ -35,8 +35,8 @@ export default function DoctorDetailSheet({ doctor }) {
             <div className="flex flex-col items-center gap-4 mt-4">
               <Avatar className="h-24 w-24">
                 <AvatarImage
-                  src={doctor.user.image}
-                  alt={`${doctor.user.firstName} ${doctor.user.lastName}`}
+                  src={doctor.user?.image}
+                  alt={`${doctor.user?.firstName} ${doctor.user?.lastName}`}
                 />
                 <AvatarFallback>
                   {doctor.user?.firstName?.charAt(0)}
@@ -44,7 +44,7 @@ export default function DoctorDetailSheet({ doctor }) {
                 </AvatarFallback>
               </Avatar>
               <h1 className="font-bold text-2xl text-center">
-                {`${doctor.user.firstName} ${doctor.user.lastName}`}
+                {`${doctor.user?.firstName} ${doctor.user?.lastName}`}
               </h1>
             </div>
           </SheetDescription>

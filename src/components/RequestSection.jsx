@@ -1,16 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -20,16 +10,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { HomeIcon, PlusIcon, ClockIcon, CheckIcon, XIcon } from "lucide-react";
-import DoctorDetailSheet from "./DoctorDetailSheet";
-// import { updateRequest } from "@/actions/requests";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
-// import DoctorCard from "./DoctorCard";
 import { updateRequest } from "@/actions/requests/requests";
+import DoctorCard from "./DoctorCard";
 
 
 export default function DoctorRequests({ requests, status }) {
+    
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedAction, setSelectedAction] = useState({
     type: null,
@@ -58,7 +45,10 @@ export default function DoctorRequests({ requests, status }) {
   };
 
   useEffect(() => {
+    // console.log("activeFilter=>", activeFilter);
     const params = new URLSearchParams(searchParams);
+    // console.log("params=>", params);
+    
     if (activeFilter) {
       params.set("status", activeFilter);
       params.set("page", "1");
@@ -75,15 +65,15 @@ export default function DoctorRequests({ requests, status }) {
   //   (request) => activeFilter === "all" || request.status === activeFilter
   // );
 
-//   const renderRequestCard = (request) => (
-//     <DoctorCard
-//       key={request._id}
-//       request={request}
-//       isAdmin={true}
-//       onAccept={() => handleAction("accept", request._id)}
-//       onReject={() => handleAction("reject", request._id)}
-//     />
-//   );
+  const renderRequestCard = (request) => (
+    <DoctorCard
+      key={request._id}
+      request={request}
+      isAdmin={true}
+      onAccept={() => handleAction("accept", request._id)}
+      onReject={() => handleAction("reject", request._id)}
+    />
+  );
 
   return (
     <>
@@ -129,7 +119,7 @@ export default function DoctorRequests({ requests, status }) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {/*  change it later -> requests.map(renderRequestCard) */}
-        {requests.map(() => console.log('REQUESTS'))} 
+        {requests.map(renderRequestCard)} 
       </div>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>

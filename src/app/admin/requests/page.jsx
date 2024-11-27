@@ -12,18 +12,21 @@ import DoctorDetailSheet from '@/components/DoctorDetailSheet';
 import DoctorRequests from '@/components/RequestSection';
 
 
-const Requests = async () => {
+const Requests = async ({ searchParams }) => {
   const session = await auth();
+  const { status } = searchParams;
+  // console.log("searchParams ->", searchParams);
+  
 
   if (!session && !session?.user?.role != 'admin') redirect('/')
-  const { requests } = await getRequest();
+  const { requests } = await getRequest(status);
 
   // console.log("Requests ->", requests);
 
   return (
     <div className='container mx-auto'>
       <h1 className='text-3xl font-bold my-3'>{`Doctor's`} Request</h1>
-     <DoctorRequests requests={requests} />
+     <DoctorRequests requests={requests} status={status} />
     </div>
   )
 }
