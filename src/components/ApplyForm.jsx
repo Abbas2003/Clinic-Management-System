@@ -36,7 +36,7 @@ export default function DoctorApplyForm({ session }) {
 
   const { toast } = useToast()
 
-  const form = useForm({	
+  const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       bio: "",
@@ -50,24 +50,35 @@ export default function DoctorApplyForm({ session }) {
       address: "",
     },
   });
- 
+
 
   async function onSubmit(values) {
-    console.log(values);
+    console.log("values->", values);
     values.user = session.user._id;
-    await addRequest(values)
-    form.reset();
-    toast({
-      title: "Your application is submitted.",
-      description: "You will be informed by email in 3 business days.",
-    })
+
+    const response = await addRequest(values)
+    if (response.error) {
+      form.reset();
+      toast({
+        title: "Sorry, your application cannot be submitted.",
+        description: response.msg,
+      })
+    } else {
+      form.reset();
+      toast({
+        title: "Your application is submitted.",
+        description: "You will be informed by email in 3 business days.",
+      })
+    }
+    // console.log("response->", response);
+
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-2 gap-5">
-          
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-2 md:px-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+
 
           <FormField
             name="hospital"
@@ -201,7 +212,7 @@ export default function DoctorApplyForm({ session }) {
             )}
           />
 
-         
+
           <FormField
             name="address"
             control={form.control}

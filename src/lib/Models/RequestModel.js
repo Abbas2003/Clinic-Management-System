@@ -21,4 +21,4 @@ const RequestSchema = new Schema({
 })
 
 
-export const RequestModel = mongoose.models.Users || mongoose.model('Users', RequestSchema)
+export const RequestModel = mongoose.models.Requests || mongoose.model('Requests', RequestSchema)

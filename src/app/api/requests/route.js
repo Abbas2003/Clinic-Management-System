@@ -2,11 +2,22 @@ import connectDB from "@/lib/connectDB";
 import { RequestModel } from "@/lib/Models/RequestModel";
 
 
-export async function POST(req){
+export async function POST(req) {
     await connectDB();
-    try{
+    try {
         const obj = await req.json();
-        let newRequest = await new RequestModel({...obj});
+
+        const isUserRequestedBefore = await RequestModel.findOne({ user: obj.user });
+        if (isUserRequestedBefore) {
+            return Response.json({
+                error: true,
+                msg: "You have already requested before",
+            }, {
+                status: 403
+            })
+        }
+
+        let newRequest = await new RequestModel({ ...obj });
         newRequest = await newRequest.save();
 
         return Response.json({
@@ -16,7 +27,7 @@ export async function POST(req){
         }, {
             status: 201
         })
-    } catch(e){
+    } catch (e) {
         return Response.json({
             error: true,
             msg: "Something went wrong",
@@ -26,7 +37,7 @@ export async function POST(req){
     }
 }
 
-export async function GET(req){
+export async function GET(req) {
     await connectDB();
 
     const requests = await RequestModel.find();
@@ -40,6 +51,6 @@ export async function GET(req){
     })
 }
 
-export async function PUT(req){}
+export async function PUT(req) { }
 
-export async function DELETE(req){}
+export async function DELETE(req) { }
