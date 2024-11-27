@@ -25,6 +25,7 @@ const formSchema = z.object({
   hospital: z.string().min(2).max(50),
   fees: z.string(),
   gender: z.string(),
+  degree: z.string(),
   appointmentTime: z.string(),
   specialization: z.string(),
   experience: z.string(),
@@ -43,6 +44,7 @@ export default function DoctorApplyForm({ session }) {
       hospital: "",
       fees: "",
       gender: "",
+      degree: "",
       appointmentTime: "",
       specialization: "",
       experience: "",
@@ -53,9 +55,9 @@ export default function DoctorApplyForm({ session }) {
 
 
   async function onSubmit(values) {
-    console.log("values->", values);
     values.user = session.user._id;
-
+    console.log("values->", values);
+    
     const response = await addRequest(values)
     if (response.error) {
       form.reset();
@@ -169,7 +171,22 @@ export default function DoctorApplyForm({ session }) {
               </FormItem>
             )}
           />
+          
 
+
+          <FormField
+            name="degree"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Degree</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter degree" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <FormField
             name="specialization"

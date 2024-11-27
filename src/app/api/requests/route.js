@@ -51,6 +51,31 @@ export async function GET(req) {
     })
 }
 
-export async function PUT(req) { }
+export async function PUT(req) { 
+    await connectDB();
+    try {
+        const obj = await req.json();
+        let { id, status } = obj
+        const updated = await RequestModel.findOneAndUpdate({
+            _id: id
+        }, { status: status }).exec();
+
+        return Response.json({
+            error: false,
+            msg: "Request updated Successfully",
+            request: updated
+        }, {
+            status: 200
+        })
+
+    } catch(err) {
+        return Response.json({
+            error: true,
+            msg: "Something went wrong",
+        }, {
+            status: 500
+        })
+    }
+}
 
 export async function DELETE(req) { }
