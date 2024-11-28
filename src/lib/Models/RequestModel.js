@@ -13,6 +13,7 @@ const RequestSchema = new Schema({
     hospital: String,
     fees: String,
     gender: String,
+    degree: String,
     appointmentTime: String,
     specialization: String,
     experience: String,

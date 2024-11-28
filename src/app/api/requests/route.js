@@ -7,6 +7,7 @@ export async function POST(req) {
     await connectDB();
     try {
         const obj = await req.json();
+        console.log("Request Object->", obj);
 
         const isUserRequestedBefore = await RequestModel.findOne({ user: obj.user });
         if (isUserRequestedBefore) {
