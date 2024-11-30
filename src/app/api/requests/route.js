@@ -66,7 +66,7 @@ export async function PUT(req) {
         const obj = await req.json();
         let { id, status } = obj
 
-        const request = await requestModel.findOne({ _id: id });
+        const request = await RequestModel.findOne({ _id: id });
         await UserModel.findOneAndUpdate({ _id: request.user }, { role: "doctor" })
 
         const updated = await RequestModel.findOneAndUpdate({

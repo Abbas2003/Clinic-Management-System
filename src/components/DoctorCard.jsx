@@ -19,7 +19,7 @@ const DoctorCard = ({ request, isAdmin, onAccept, onReject }) => (
   <Card key={request._id}>
     <CardHeader className="flex flex-row items-center space-x-4">
       <Avatar className="h-10 w-10">
-        <AvatarImage src={request?.user?.image} alt={request?.user?.firstName} />
+        <AvatarImage src={request?.user?.imgUrl} alt={request?.user?.firstName} />
         <AvatarFallback>
           {request.user?.firstName.charAt(0)}
           {request.user?.lastName?.charAt(0)}

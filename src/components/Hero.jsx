@@ -8,15 +8,15 @@ const Hero = async () => {
     const session = await auth();
     return (
         <section className="body-font">
-            <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-                <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            <div className="container mx-auto flex px-5 md:py-24 py-12 md:flex-row flex-col items-center">
+                <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-10 md:mb-0 items-center text-center">
                     <h1 className="title-font sm:text-5xl text-3xl mb-4 font-bold text-gradiant">
                         Doctors Appointment
                     </h1>
                     <p className="mb-8 leading-relaxed">
                         Book Smarter, Heal Faster – Doctor Appointment System for Effortless Healthcare. Your Health, Just a Click Away – Seamless Doctor Appointments Anytime, Anywhere.
                     </p>
-                    <div className="flex w-full md:justify-start justify-center items-end gap-4">
+                    <div className="flex flex-col md:flex-row w-full md:justify-start justify-center md:items-end gap-4">
                         <Link href={"/doctors"}>
                             <Button className="text-md">Find Doctor You Need</Button>
                         </Link>
@@ -25,7 +25,7 @@ const Hero = async () => {
                         </Link>
                     </div>
 
-                    <div className="flex lg:flex-row md:flex-col text-gray-300 mt-7">
+                    <div className="flex lg:flex-row md:flex-col flex-col justify-center items-center gap-2 text-gray-300 mt-7">
                         <button className="bg-gray-800 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-700 hover:text-white focus:outline-none">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,7 @@ const Hero = async () => {
                                 <span className="title-font font-medium">Google Play</span>
                             </span>
                         </button>
-                        <button className="bg-gray-800 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-700 hover:text-white focus:outline-none lg:ml-4 md:ml-0 ml-4 md:mt-4 mt-0 lg:mt-0">
+                        <button className="bg-gray-800 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-700 hover:text-white focus:outline-none lg:ml-4 md:ml-0 ml-0 md:mt-4 mt-0 lg:mt-0">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"

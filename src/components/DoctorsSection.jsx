@@ -6,16 +6,19 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { ClockIcon, HomeIcon, PlusIcon } from "@radix-ui/react-icons"
 import { getRequest } from "@/actions/requests/requests"
+import DoctorCard from "./DoctorCard"
 
 
 
 const DoctorsSection = async ({ isHome }) => {
 
     const fewDoctors = isHome ? doctors.slice(0, 6) : doctors
-    const {} = await getRequest();
+    const {requests} = await getRequest();
+    console.log("requests ->", requests);
+    
 
     return (
-        <div className='container mx-auto mt-5'>
+        <div className='container mx-auto mt-5 px-2 md:px-0'>
             <div className='flex items-center justify-between'>
                 <h1 className='text-3xl font-bold'>Our Doctors</h1>
 
@@ -42,52 +45,9 @@ const DoctorsSection = async ({ isHome }) => {
             </div>
 
 
-            <div className="grid my-3 grid-cols-1 md:grid-cols-2 mt-10 lg:grid-cols-3 gap-3">
-                {fewDoctors.map((doctor) => (
-                    <Card key={doctor.id}>
-                        <CardHeader className={"flex flex-row"}>
-                            <Avatar className="self-center h-10 w-10">
-                                <AvatarImage src="https://github.com/shadcn.png" />
-                                <AvatarFallback>DAS</AvatarFallback>
-                            </Avatar>
-                            <div className="pl-3">
-                                <CardTitle>{doctor.name}</CardTitle>
-                                <CardDescription>{doctor.specialization}</CardDescription>
-                            </div>
-                        </CardHeader>
-
-                        {!isHome && (
-                            <CardContent>
-                                <div className="flex justify-between my-2">
-                                    <div className="flex gap-2 items-center">
-                                        <HomeIcon />
-                                        <h1 className="font-semibold">Gender</h1>
-                                    </div>
-                                    <h1>{doctor.gender}</h1>
-                                </div>
-                                <div className="flex justify-between my-2">
-                                    <div className="flex gap-2 items-center">
-                                        <PlusIcon />
-                                        <h1 className="font-semibold">Hospital</h1>
-                                    </div>
-                                    <h1>{doctor.hospital}</h1>
-                                </div>
-                                <div className="flex justify-between my-2">
-                                    <div className="flex gap-2 items-center">
-                                        <ClockIcon />
-                                        <h1 className="font-semibold">Appointment Time</h1>
-                                    </div>
-                                    <h1>{doctor.timing}</h1>
-                                </div>
-                            </CardContent>
-                        )}
-
-                        <CardFooter>
-                            <Link href={`/doctors/${doctor.id}`}>
-                                <Button>See Detail</Button>
-                            </Link>
-                        </CardFooter>
-                    </Card>
+            <div className="grid my-3 grid-cols-1 md:grid-cols-2 mt-10 lg:grid-cols-3 gap-3 mx-auto">
+                {requests.map((doctor) => (
+                    <DoctorCard key={doctor._id} request={doctor} isAdmin={false} />
                 ))}
             </div>
 

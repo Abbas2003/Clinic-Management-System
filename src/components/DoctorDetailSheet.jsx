@@ -35,7 +35,7 @@ export default function DoctorDetailSheet({ doctor }) {
             <div className="flex flex-col items-center gap-4 mt-4">
               <Avatar className="h-24 w-24">
                 <AvatarImage
-                  src={doctor.user?.image}
+                  src={doctor.user?.imgUrl}
                   alt={`${doctor.user?.firstName} ${doctor.user?.lastName}`}
                 />
                 <AvatarFallback>
@@ -60,14 +60,14 @@ export default function DoctorDetailSheet({ doctor }) {
           <div className="flex items-center gap-2">
             <GraduationCap className="h-5 w-5 text-gray-500" />
             <p>
-              <span className="font-semibold">Degree:</span> {doctor.degree}
+              <span className="font-semibold">Degree:</span> {doctor.degree || "Undergraduate"} 
             </p>
           </div>
           <div className="flex items-center gap-2">
             <Briefcase className="h-5 w-5 text-gray-500" />
             <p>
               <span className="font-semibold">Experience:</span>{" "}
-              {doctor.experience}
+              {doctor.experience || "None"}
             </p>
           </div>
           <div className="flex items-center gap-2">
