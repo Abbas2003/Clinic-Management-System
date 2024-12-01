@@ -22,6 +22,13 @@ export async function getRequest(status){
     return requests;
 }
 
+export async function getSingleRequest(id){
+    let request = await fetch(`${process.env.BASE_URL}api/requests/${id}`);
+    request = request.json();
+    
+    return request;
+}
+
 export async function updateRequest(id, status){
     let requests = await fetch(`${process.env.BASE_URL}api/requests`, {
         method: 'PUT',

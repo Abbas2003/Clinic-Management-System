@@ -7,7 +7,7 @@ export async function POST(req) {
     await connectDB();
     try {
         const obj = await req.json();
-        console.log("Request Object->", obj);
+        // console.log("Request Object->", obj);
 
         const isUserRequestedBefore = await RequestModel.findOne({ user: obj.user });
         if (isUserRequestedBefore) {
@@ -49,7 +49,7 @@ export async function GET(req) {
     }
     
     const requests = await RequestModel.find(query).populate("user");
-    console.log("Status in Backend->", status);
+    // console.log("Status in Backend->", status);
 
     return Response.json({
         error: false,

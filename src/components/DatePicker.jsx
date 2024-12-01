@@ -12,9 +12,19 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
+import Link from "next/link"
+import { useToast } from "@/hooks/use-toast"
 
-export default function DatePicker() {
+export default function DatePicker({ session }) {
     const [date, setDate] = React.useState(new Date())
+    const {toast} = useToast();
+
+    const handleBookApt = () => {
+        let isDateInFuture = Date.now() < new Date(date);
+        console.log("isDateInFuture", isDateInFuture);
+        if(!isDateInFuture) return toast({ title: "Please select a future date" });
+        const obj = { user: session.user._id, request: request, date };   
+    }
 
     return (
         <div className="w-full my-5">
@@ -41,6 +51,14 @@ export default function DatePicker() {
                     />
                 </PopoverContent>
             </Popover>
+
+            {session ? (
+                <Button className="w-full w-3/2 my-3" onClick={handleBookApt}>Book Appointment</Button>
+            ) : (
+                <Link href="/signin">
+                    <Button className="w-full my-3">Login to Book Appointment</Button>
+                </Link>
+            )}
         </div>
     )
 }
