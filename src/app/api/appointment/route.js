@@ -1,14 +1,13 @@
 import connectDB from "@/lib/connectDB";
 import { AppointmentModel } from "@/lib/Models/AppointmentModel";
-import { UserModel } from "@/lib/Models/UserModel";
 
 
-export async function POST(req){
+export async function POST(req) {
     await connectDB();
-    try{
+    try {
         const obj = await req.json();
-        let newAppointment = await new AppointmentModel({...obj});
-        newAppointment = await nnewAppointment.save();
+        let newAppointment = await new AppointmentModel({ ...obj });
+        newAppointment = await newAppointment.save();
 
         return Response.json({
             error: false,
@@ -17,7 +16,7 @@ export async function POST(req){
         }, {
             status: 201
         })
-    } catch(e){
+    } catch (e) {
         return Response.json({
             error: true,
             msg: "Something went wrong",
@@ -27,26 +26,38 @@ export async function POST(req){
     }
 }
 
-export async function GET(req){
+export async function GET(req) {
     await connectDB();
 
-    const query = {}
-    const doctor = req?.nextUrl?.searchParams?.get("doctor");
-    const user = req?.nextUrl?.searchParams?.get("user");
-    if(doctor) query.doctor = doctor;
-    if(user) query.user = user;
+    try {
+        const query = {}
+        const doctor = req?.nextUrl?.searchParams?.get("doctor");
+        const user = req?.nextUrl?.searchParams?.get("user");
+        if (doctor) query.doctor = doctor;
+        if (user) query.user = user;
 
-    const appointments = await AppointmentModel.find(query).populate("user").populate("request");
+        const appointments = await AppointmentModel.find(query).populate("user").populate("request");
 
-    return Response.json({
-        error: false,
-        msg: "Appointments fetched successfully",
-        appointments
-    }, {
-        status: 200
-    })
+        return Response.json({
+            error: false,
+            msg: "Appointments fetched successfully",
+            appointments
+        }, {
+            status: 200
+        })
+    } catch (error) {
+        console.log("error->", error.message);
+        return Response.json({
+            error: true,
+            msg: error.message,
+        }, {
+            status: 400
+        })
+    }
+
+
 }
 
-export async function PUT(req){}
+export async function PUT(req) { }
 
-export async function DELETE(req){}
+export async function DELETE(req) { }

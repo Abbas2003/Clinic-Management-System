@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const AppointmentSchema = new Schema({
     user: { type: mongoose.Types.ObjectId, ref: "Users" },
-    request: { type: mongoose.Types.ObjectId, ref: "Request" },
+    request: { type: mongoose.Types.ObjectId, ref: "Requests" },
     status: {
         type: String,
         default: "pending",

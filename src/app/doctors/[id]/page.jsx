@@ -149,7 +149,7 @@ const DoctorDetails = async ({ params }) => {
                             <p className="text-muted-foreground">{bio}</p>
                         </div>
                         <div className="space-y-4">
-                            <DatePicker session={session} />
+                            <DatePicker session={session} request={params.id} />
                         </div>
                     </CardContent>
                 </Card>

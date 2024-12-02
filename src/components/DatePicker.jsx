@@ -14,16 +14,23 @@ import {
 } from "@/components/ui/popover"
 import Link from "next/link"
 import { useToast } from "@/hooks/use-toast"
+import { addAppointment } from "@/actions/appointments/appointments"
 
-export default function DatePicker({ session }) {
+export default function DatePicker({ session, request }) {
     const [date, setDate] = React.useState(new Date())
     const {toast} = useToast();
+    const [loading, setLoading] = React.useState(false);
 
-    const handleBookApt = () => {
+    const handleBookApt = async () => {
         let isDateInFuture = Date.now() < new Date(date);
         console.log("isDateInFuture", isDateInFuture);
         if(!isDateInFuture) return toast({ title: "Please select a future date" });
-        const obj = { user: session.user._id, request: request, date };   
+        setLoading(true);
+        const obj = { user: session.user._id, request: request, date };
+        const response = await addAppointment(obj);
+        toast({
+            title: response.msg,
+        })   
     }
 
     return (
@@ -53,7 +60,7 @@ export default function DatePicker({ session }) {
             </Popover>
 
             {session ? (
-                <Button className="w-full w-3/2 my-3" onClick={handleBookApt}>Book Appointment</Button>
+                <Button className="w-full my-3" onClick={handleBookApt}>Book Appointment</Button>
             ) : (
                 <Link href="/signin">
                     <Button className="w-full my-3">Login to Book Appointment</Button>
