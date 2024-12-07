@@ -1,5 +1,7 @@
 import connectDB from "@/lib/connectDB";
 import { AppointmentModel } from "@/lib/Models/AppointmentModel";
+import { RequestModel } from "@/lib/Models/RequestModel";
+import { UserModel } from "@/lib/Models/UserModel";
 
 
 export async function POST(req) {
@@ -36,7 +38,7 @@ export async function GET(req) {
         if (doctor) query.doctor = doctor;
         if (user) query.user = user;
 
-        const appointments = await AppointmentModel.find(query).populate("user").populate("request");
+        const appointments = await AppointmentModel.find(query).populate("user").populate({ path: "request", populate: { path: "user"} });
 
         return Response.json({
             error: false,

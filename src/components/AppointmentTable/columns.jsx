@@ -1,7 +1,8 @@
+"use client"
 
-"use client";
+import { ColumnDef } from "@tanstack/react-table"
+import { Checkbox } from "@/components/ui/checkbox"
 
-import { Checkbox } from "@/components/ui/checkbox";
 
 
 export const columns = [
@@ -47,4 +48,5 @@ export const columns = [
     accessorKey: "status",
     header: "Status",
   },
-];
+]
+
