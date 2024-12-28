@@ -35,7 +35,11 @@ export async function GET(req) {
         const query = {}
         const doctor = req?.nextUrl?.searchParams?.get("doctor");
         const user = req?.nextUrl?.searchParams?.get("user");
-        if (doctor) query.doctor = doctor;
+
+        if (doctor) {
+            const doctorRequest = await RequestModel.findOne({ user: doctor });
+            query.request = doctorRequest._id;
+        }
         if (user) query.user = user;
 
         const appointments = await AppointmentModel.find(query).populate("user").populate({ path: "request", populate: { path: "user"} });
@@ -60,6 +64,30 @@ export async function GET(req) {
 
 }
 
-export async function PUT(req) { }
+export async function PUT(req) {
+    await connectDB();
+    try {
+        const { id, status } = await req.json();
+
+        const update = await AppointmentModel.findOneAndUpdate({ _id: id }, { status: status }).exec();
+
+        return Response.json({
+            error: false,
+            msg: "Appointment updated successfully",
+            appointment: update
+        }, {
+            status: 201
+        })
+
+    } catch (error) {
+        console.error(error);
+        return Response.json({
+            error: true,
+            msg: error.message,
+        }, {
+            status: 400
+        })
+    }
+}
 
 export async function DELETE(req) { }

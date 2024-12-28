@@ -12,14 +12,15 @@ import { Calendar, CheckCircle, Clock, MapPin, XCircle } from "lucide-react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Button } from "../ui/button";
-// import { updateAppointment } from "@/actions/appointment";
 import { useState } from "react";
+import { updateAppointment } from "@/actions/appointments/appointments";
 dayjs.extend(relativeTime);
 
 
 
 export default function DoctorAppointmentCard({ appointment }) {
     const [loading, setLoading] = useState(false);
+
     const handleAccept = async () => {
         setLoading(true);
         await updateAppointment(appointment._id, "accepted");
@@ -37,7 +38,7 @@ export default function DoctorAppointmentCard({ appointment }) {
             <CardHeader className="flex flex-row items-center gap-4">
                 <Avatar className="h-12 w-12">
                     <AvatarImage
-                        src={appointment?.user.picture}
+                        src={appointment?.user.imgUrl}
                         alt={`${appointment.user.firstName} ${appointment.user.lastName}`}
                     />
                     <AvatarFallback>

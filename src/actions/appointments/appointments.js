@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 
 export async function addAppointment(data){
     // console.log("data->", data);
@@ -29,4 +31,14 @@ export async function getAppointment(role, id){
     appointments = appointments.json();
     
     return appointments;
+}
+
+export async function updateAppointment(id, status){
+    
+    let update = await fetch(`${process.env.BASE_URL}api/appointment`, {
+        method: "PUT",
+        body: JSON.stringify({id, status}),
+    });
+
+    revalidatePath("/appointments");
 }

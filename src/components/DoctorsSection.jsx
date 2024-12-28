@@ -12,10 +12,7 @@ import DoctorCard from "./DoctorCard"
 
 const DoctorsSection = async ({ isHome }) => {
 
-    const fewDoctors = isHome ? doctors.slice(0, 6) : doctors
     const {requests} = await getRequest();
-    console.log("requests ->", requests);
-    
 
     return (
         <div className='container mx-auto mt-5 px-2 md:px-0'>

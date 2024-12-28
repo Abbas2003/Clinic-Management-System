@@ -13,6 +13,9 @@ import {
   dayjs.extend(relativeTime);
   
   export default function PatientAppointmentCard({ appointment }) {
+    // Data nh arhi appointment me
+    console.log("appointment->", appointment);
+    
     return (
       <Card key={appointment._id} className="shadow-lg">
         <CardHeader className="flex flex-row items-center gap-4">
@@ -51,10 +54,11 @@ import {
           </p>
           <div className="flex items-center gap-2 text-sm">
             <Calendar className="h-4 w-4" />
+            {/* Mere pas date nh arhi request me! */}
             <span>
-              {dayjs(new Date(appointment.date)).fromNow() +
+              {dayjs(new Date(appointment.appointmentTime)).fromNow() +
                 " " +
-                dayjs(new Date(appointment.date)).format("dd DD MMMM")}
+                dayjs(new Date(appointment.appointmentTime)).format("dd DD MMMM")}
             </span>
           </div>
           <div className="flex items-center gap-2 text-sm">

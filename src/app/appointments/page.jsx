@@ -13,12 +13,18 @@ dayjs.extend(relativeTime);
 export default async function Appointments() {
 
     const session = await auth();
+    console.log(session);
+    const {role, _id} = session.user;
+    console.log("role & id->", role, _id);
+    
+    
     const { appointments, status } = await getAppointment(
         session.user.role == "doctor" ? "doctor" : "user",
         session.user._id,
         // status
       );
-    console.log("response->", response.appointments);
+    // const {appointments} = await getAppointment(role, _id);
+    console.log("response->", appointments);
     const isDoctor = session.user.role == "doctor";
 
     const formatAppointments = (appointments) => {
@@ -54,7 +60,7 @@ export default async function Appointments() {
             </div>
             {/* <div className="my-10">
                 {
-                    <AppointmentTable columns={columns} data={formatAppointments(response.appointments)} />
+                    <AppointmentTable columns={columns} data={formatAppointments(appointments)} />
                 }
             </div> */}
         </div>
