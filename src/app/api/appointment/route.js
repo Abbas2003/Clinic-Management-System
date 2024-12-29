@@ -1,7 +1,6 @@
 import connectDB from "@/lib/connectDB";
 import { AppointmentModel } from "@/lib/Models/AppointmentModel";
 import { RequestModel } from "@/lib/Models/RequestModel";
-import { UserModel } from "@/lib/Models/UserModel";
 
 
 export async function POST(req) {
@@ -35,19 +34,38 @@ export async function GET(req) {
         const query = {}
         const doctor = req?.nextUrl?.searchParams?.get("doctor");
         const user = req?.nextUrl?.searchParams?.get("user");
+        const status = req?.nextUrl?.searchParams?.get("status");
+        const now = Date.now();
 
         if (doctor) {
             const doctorRequest = await RequestModel.findOne({ user: doctor });
             query.request = doctorRequest._id;
         }
+        if (status && status !== "upcoming" && status !== "past") query.status = status;
+        if (status && status == "upcoming") {
+            query.date = { $gt: now };
+            query.status = "accepted"
+        }
+        if (status && status == "past") {
+            query.date = {
+                $lt: now,
+            };
+        }
         if (user) query.user = user;
 
-        const appointments = await AppointmentModel.find(query).populate("user").populate({ path: "request", populate: { path: "user"} });
+        const stats = {
+            pending: await AppointmentModel.find({ status: "pending" }).countDocuments(),
+            accepted: await AppointmentModel.find({ status: "accepted" }).countDocuments(),
+            cancelled: await AppointmentModel.find({ status: "cancelled" }).countDocuments(),
+        }
+
+        const appointments = await AppointmentModel.find(query).populate("user").populate({ path: "request", populate: { path: "user" } });
 
         return Response.json({
             error: false,
             msg: "Appointments fetched successfully",
-            appointments
+            appointments,
+            stats
         }, {
             status: 200
         })

@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache";
 
 
 export async function addAppointment(data){
-    // console.log("data->", data);
     
     let add = await fetch(`${process.env.BASE_URL}api/appointment`, {
         method: "POST",
@@ -16,14 +15,14 @@ export async function addAppointment(data){
 }
 
 
-export async function getAppointment(role, id){
+export async function getAppointment(role, id, status = "pending"){
     let url;
-    console.log("role->", role, id);
+    console.log("role->", role, id, status);
     
     if(role === "user"){
-        url = `${process.env.BASE_URL}api/appointment?user=${id}`;
+        url = `${process.env.BASE_URL}api/appointment?user=${id}&status=${status}`;
     } else {
-        url = `${process.env.BASE_URL}api/appointment?doctor=${id}`;
+        url = `${process.env.BASE_URL}api/appointment?doctor=${id}&status=${status}`;
     }
     let appointments = await fetch(url, {
         cache: "no-cache",
