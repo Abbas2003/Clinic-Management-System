@@ -7,7 +7,6 @@ export async function GET(req, { params }) {
 
     
     const requests = await RequestModel.findOne({ _id: params.id }).populate("user");
-    // console.log("User in Backend->", requests);
 
     return Response.json({
         error: false,

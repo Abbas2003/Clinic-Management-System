@@ -45,9 +45,7 @@ export default function DoctorRequests({ requests, status }) {
   };
 
   useEffect(() => {
-    // console.log("activeFilter=>", activeFilter);
     const params = new URLSearchParams(searchParams);
-    // console.log("params=>", params);
     
     if (activeFilter) {
       params.set("status", activeFilter);
@@ -58,13 +56,9 @@ export default function DoctorRequests({ requests, status }) {
     }
     replace(`${pathname}?${params.toString()}`);
 
-    // console.log("params=>", params);
   }, [activeFilter]);
 
-  // const filteredRequests = requests.filter(
-  //   (request) => activeFilter === "all" || request.status === activeFilter
-  // );
-
+  
   const renderRequestCard = (request) => (
     <DoctorCard
       key={request._id}

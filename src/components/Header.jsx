@@ -8,7 +8,6 @@ import {
     MenubarShortcut,
     MenubarTrigger,
 } from "@/components/ui/menubar"
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { ModeToggle } from '@/components/dark-theme-toggler'
 import { auth, signOut } from '../../auth'
 import Link from 'next/link'
@@ -18,13 +17,13 @@ import Image from 'next/image'
 
 
 const Header = async () => {
-
     const session = await auth()
-    // console.log(session);
 
     return (
         <section className='container mx-auto flex items-center justify-between p-4 border-b'>
-            <div className='text-2xl font-serif'>Logo</div>
+            <div>
+                <Image src='/medical-logo.png' alt='Logo' height={60} width={60} />
+            </div>
             <div className='flex items-center gap-3'>
                 <div>
                     {session ? (
@@ -33,6 +32,7 @@ const Header = async () => {
                                 <MenubarTrigger className="border-none bg-transparent p-0 m-0">
                                     <Image
                                         src={session?.user?.image}
+                                        alt={session?.user?.firstName}
                                         height={40}
                                         width={40}
                                         className="rounded-full"

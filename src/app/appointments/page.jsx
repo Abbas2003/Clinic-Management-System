@@ -11,7 +11,6 @@ dayjs.extend(relativeTime);
 export default async function Appointments({ searchParams }) {
 
     const session = await auth();
-    console.log(session);
     const { status } = searchParams;
 
     const { appointments, stats } = await getAppointment(
@@ -19,20 +18,7 @@ export default async function Appointments({ searchParams }) {
         session.user._id,
         status
     );
-    console.log("response->", appointments);
-    console.log("stats->", stats);
     const isDoctor = session.user.role == "doctor";
-
-    const formatAppointments = (appointments) => {
-        return appointments.map(appointment => ({
-            _id: appointment._id,
-            doctor: { name: appointment.user.firstName + ' ' + appointment.user.lastName },
-            user: { name: appointment.request.user.firstName + ' ' + appointment.request.user.lastName || "N/A" },
-            appointmentDate: new Date(appointment.request.appointmentTime).toLocaleDateString(),
-            appointmentTime: new Date(appointment.request.appointmentTime).toLocaleTimeString(),
-            status: appointment.status,
-        }))
-    }
 
     return (
         <div className="container mx-auto">
@@ -73,11 +59,6 @@ export default async function Appointments({ searchParams }) {
                     )
                 )}
             </div>
-            {/* <div className="my-10">
-                {
-                    <AppointmentTable columns={columns} data={formatAppointments(appointments)} />
-                }
-            </div> */}
         </div>
     )
 }

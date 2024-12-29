@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -56,7 +55,6 @@ export default function DoctorApplyForm({ session }) {
 
   async function onSubmit(values) {
     values.user = session.user._id;
-    console.log("values->", values);
     
     const response = await addRequest(values)
     if (response.error) {
@@ -72,7 +70,6 @@ export default function DoctorApplyForm({ session }) {
         description: "You will be informed by email in 3 business days.",
       })
     }
-    // console.log("response->", response);
 
   }
 

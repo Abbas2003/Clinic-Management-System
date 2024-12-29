@@ -1,10 +1,7 @@
 import Link from "next/link"
 import { Button } from "./ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
-import { doctors, specializations } from "@/lib/data"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
-import { ClockIcon, HomeIcon, PlusIcon } from "@radix-ui/react-icons"
+import { specializations } from "@/lib/data"
 import { getRequest } from "@/actions/requests/requests"
 import DoctorCard from "./DoctorCard"
 

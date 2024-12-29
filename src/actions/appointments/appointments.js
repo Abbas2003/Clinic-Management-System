@@ -17,7 +17,6 @@ export async function addAppointment(data){
 
 export async function getAppointment(role, id, status = "pending"){
     let url;
-    console.log("role->", role, id, status);
     
     if(role === "user"){
         url = `${process.env.BASE_URL}api/appointment?user=${id}&status=${status}`;

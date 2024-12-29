@@ -32,7 +32,7 @@ function InfoItem({ icon, label, value }) {
 const DoctorDetails = async ({ params }) => {
     const session = await auth();
     const { requests } = await getSingleRequest(params.id);
-    console.log("Requested Doc->", requests);
+    // console.log("Requested Doc->", requests);
 
     const doctorInfo = requests?.user || {};
     const {
