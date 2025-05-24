@@ -8,7 +8,7 @@ import DoctorRequests from '@/components/RequestSection';
 const Requests = async ({ searchParams }) => {
   const session = await auth();
   const { status } = searchParams;
-  // console.log("searchParams ->", searchParams);
+  console.log("session ->", session?.user?.role);
   
 
   if (!session && !session?.user?.role != 'admin') redirect('/')

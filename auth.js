@@ -1,5 +1,5 @@
-import connectDB from "@/lib/connectDB"
-import { UserModel } from "@/lib/Models/UserModel";
+import connectDB from "./src/lib/connectDB"
+import { UserModel } from "./src/lib/Models/UserModel";
 import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
 

@@ -11,6 +11,8 @@ dayjs.extend(relativeTime);
 export default async function Appointments({ searchParams }) {
 
     const session = await auth();
+    console.log("session ->", session?.user);
+    
     const { status } = searchParams;
 
     const { appointments, stats } = await getAppointment(
@@ -19,6 +21,9 @@ export default async function Appointments({ searchParams }) {
         status
     );
     const isDoctor = session.user.role == "doctor";
+    console.log("appointments ->", appointments);
+    console.log("stats ->", stats);
+    
 
     return (
         <div className="container mx-auto">
