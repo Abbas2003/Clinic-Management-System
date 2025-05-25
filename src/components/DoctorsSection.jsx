@@ -1,20 +1,28 @@
-import Link from "next/link"
-import { Button } from "./ui/button"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select"
-import { specializations } from "@/lib/data"
-import { getRequest } from "@/actions/requests/requests"
-import DoctorCard from "./DoctorCard"
+"use client";
 
+import Link from "next/link";
+import { useState } from "react";
+import { Button } from "./ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { specializations } from "@/lib/data";
+import DoctorCard from "./DoctorCard";
 
+const DoctorsSection = ({ isHome, requests }) => {
+    
+    const [selectedSpecialization, setSelectedSpecialization] = useState("all");
 
-const DoctorsSection = async ({ isHome }) => {
-
-    const {requests} = await getRequest();
+    const filteredDoctors = selectedSpecialization === "all"
+        ? requests
+        : requests.filter(
+            (doctor) =>
+                doctor.specialization?.toLowerCase().trim() === selectedSpecialization.toLowerCase().trim()
+        );
+        
 
     return (
         <div className='container mx-auto mt-5 px-2 md:px-0'>
             <div className='flex items-center justify-between'>
-                <h1 className='text-3xl font-bold'>Our Doctors</h1>
+                <h1 className='text-2xl md:text-5xl font-bold'>Our Doctors</h1>
 
                 {isHome ? (
                     <Link href={"/doctors"}>
@@ -22,13 +30,17 @@ const DoctorsSection = async ({ isHome }) => {
                     </Link>
                 ) : (
                     <div>
-                        <Select>
+                        <Select
+                            value={selectedSpecialization}
+                            onValueChange={setSelectedSpecialization}
+                        >
                             <SelectTrigger className="w-[180px]">
                                 <SelectValue placeholder="Doctors" />
                             </SelectTrigger>
                             <SelectContent>
+                                <SelectItem value="all">All</SelectItem>
                                 {specializations.map((category) => (
-                                    <SelectItem key={category.id} value={category}>
+                                    <SelectItem key={category.id} value={category.specialization}>
                                         {category.specialization}
                                     </SelectItem>
                                 ))}
@@ -38,15 +50,15 @@ const DoctorsSection = async ({ isHome }) => {
                 )}
             </div>
 
-
             <div className="grid my-3 grid-cols-1 md:grid-cols-2 mt-10 lg:grid-cols-3 gap-3 mx-auto">
-                {requests.map((doctor) => (
-                    <DoctorCard key={doctor._id} request={doctor} isAdmin={false} />
+                {isHome ? requests?.map((doctor) => (
+                    <DoctorCard key={doctor?._id} request={doctor} isAdmin={false} />
+                )) : filteredDoctors?.map((filteredDoctor) => (
+                    <DoctorCard key={filteredDoctor?._id} request={filteredDoctor} isAdmin={false} />
                 ))}
             </div>
-
         </div>
-    )
-}
+    );
+};
 
-export default DoctorsSection
+export default DoctorsSection;

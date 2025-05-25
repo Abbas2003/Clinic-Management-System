@@ -63,6 +63,7 @@ const Hero = async () => {
                         height={500}
                         width={500}
                         alt='Doctor Image'
+                        className="object-cover object-center rounded"
                     />
                 </div>
             </div>

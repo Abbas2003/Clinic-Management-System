@@ -18,12 +18,14 @@ import Image from 'next/image'
 
 const Header = async () => {
     const session = await auth()
+    console.log(session?.user);
+    
 
     return (
         <section className='container mx-auto flex items-center justify-between p-4 border-b'>
-            <div>
+            <Link href="/">
                 <Image src='/medical-logo.png' alt='Logo' height={60} width={60} />
-            </div>
+            </Link>
             <div className='flex items-center gap-3'>
                 <div>
                     {session ? (
@@ -32,7 +34,7 @@ const Header = async () => {
                                 <MenubarTrigger className="border-none bg-transparent p-0 m-0">
                                     <Image
                                         src={session?.user?.image}
-                                        alt={session?.user?.firstName}
+                                        alt={session?.user?.name}
                                         height={40}
                                         width={40}
                                         className="rounded-full"

@@ -1,10 +1,12 @@
 import React from 'react'
 import DoctorsSection from '../../components/DoctorsSection'
+import { getRequest } from '@/actions/requests/requests';
 
-const Doctors = ({ params }) => {
+const Doctors = async ({ params }) => {
+     const {requests} = await getRequest();
     return (
         <section>
-            <DoctorsSection />
+            <DoctorsSection requests={requests} />
         </section>
     )
 }
