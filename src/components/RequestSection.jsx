@@ -74,7 +74,7 @@ export default function DoctorRequests({ requests, status }) {
       <div className="grid w-full gap-4 md:w-1/2 mx-auto grid-cols-4">
         <div
           className={`border-secondory cursor-pointer p-3 my-4 text-center border rounded ${
-            activeFilter == "all" && "bg-primary text-center text-white"
+            activeFilter == "all" && "bg-primary text-center text-white dark:text-black dark:bg-white"
           }`}
           value="all"
           onClick={() => setActiveFilter("all")}
@@ -83,7 +83,7 @@ export default function DoctorRequests({ requests, status }) {
         </div>
         <div
           className={`border-secondory cursor-pointer p-3 my-4 text-center border rounded ${
-            activeFilter == "pending" && "bg-primary text-center text-white"
+            activeFilter == "pending" && "bg-primary text-center text-white dark:text-black dark:bg-white"
           }`}
           value="pending"
           onClick={() => setActiveFilter("pending")}
@@ -92,7 +92,7 @@ export default function DoctorRequests({ requests, status }) {
         </div>
         <div
           className={`border-secondory cursor-pointer p-3 my-4 text-center border rounded ${
-            activeFilter == "accepted" && "bg-primary text-center text-white"
+            activeFilter == "accepted" && "bg-primary text-center text-white dark:text-black dark:bg-white"
           }`}
           value="accepted"
           onClick={() => setActiveFilter("accepted")}
@@ -101,7 +101,7 @@ export default function DoctorRequests({ requests, status }) {
         </div>
         <div
           className={`border-secondory cursor-pointer p-3 my-4 text-center border rounded ${
-            activeFilter == "rejected" && "bg-primary text-center text-white"
+            activeFilter == "rejected" && "bg-primary text-center text-white dark:text-black dark:bg-white"
           }`}
           value="rejected"
           onClick={() => setActiveFilter("rejected")}
