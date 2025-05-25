@@ -24,7 +24,7 @@ const Header = async () => {
     return (
         <section className='container mx-auto flex items-center justify-between p-4 border-b'>
             <Link href="/">
-                <Image src='/medical-logo.png' alt='Logo' height={60} width={60} />
+                <Image src='/medical-logo.png' alt='Logo' height={80} width={80} />
             </Link>
             <div className='flex items-center gap-3'>
                 <div>
