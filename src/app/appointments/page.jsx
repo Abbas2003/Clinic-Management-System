@@ -5,24 +5,26 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import DoctorAppointmentCard from "@/components/DocorAppointmentCard/DoctorAppointmentCard";
 import PatientAppointmentCard from "@/components/PatitentAppointmentCard/PateintAppointmentCard";
 import AppointmentFilterTabs from "@/components/Tabs/Tabs";
+import { redirect } from "next/navigation";
 dayjs.extend(relativeTime);
 
 
 export default async function Appointments({ searchParams }) {
 
     const session = await auth();
-    console.log("session ->", session?.user);
+    if(!session) redirect("/");
+    // console.log("session ->", session?.user);
 
     const { status } = searchParams;
 
     const { appointments, stats } = await getAppointment(
-        session.user.role == "doctor" ? "doctor" : "user",
-        session.user._id,
+        session?.user?.role == "doctor" ? "doctor" : "user",
+        session?.user?._id,
         status
     );
-    const isDoctor = session.user.role == "doctor";
-    console.log("appointments ->", appointments);
-    console.log("stats ->", stats);
+    const isDoctor = session?.user?.role == "doctor";
+    // console.log("appointments ->", appointments);
+    // console.log("stats ->", stats);
 
 
     return (

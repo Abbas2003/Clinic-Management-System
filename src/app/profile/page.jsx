@@ -5,9 +5,13 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { CalendarDays, Mail, MapPin, Phone, Edit, Settings, LogOut } from "lucide-react"
+import { redirect } from "next/navigation"
 
 const Profile = async () => {
   const session = await auth()
+
+  if (!session) redirect("/")
+    
   const userId = session?.user?._id
 
   let user = null
@@ -19,7 +23,7 @@ const Profile = async () => {
       const data = await res.json()
       
       user = data.user
-      console.log("user->", user);
+      // console.log("user->", user);
     } catch (error) {
       console.error("Failed to fetch user data:", error)
     }
