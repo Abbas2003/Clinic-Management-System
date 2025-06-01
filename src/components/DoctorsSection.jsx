@@ -58,12 +58,14 @@ const DoctorsSection = ({ isHome, requests }) => {
                 ))}
             </div>
 
-            <Link
-                href="/"
-                className="text-blue-600 underline underline-offset-4 hover:text-blue-800 transition-colors font-medium py-10"
-            >
-                Go back to home
-            </Link>
+            <div>
+                {!isHome && <Link
+                    href="/"
+                    className="text-blue-600 underline underline-offset-4 hover:text-blue-800 transition-colors font-medium py-10"
+                >
+                    Go back to home
+                </Link>}
+            </div>
         </div>
     );
 };
